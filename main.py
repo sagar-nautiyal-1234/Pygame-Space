@@ -3,11 +3,13 @@ import random
 import math
 from pygame import mixer
 
+# Initialize Pygame and mixer
 pygame.init()
+mixer.init()
 
 win = pygame.display.set_mode((900, 600))
 
-
+# Background
 bg = pygame.image.load('Images/bg.jpg')
 mixer.music.load('Music/background.wav')
 mixer.music.play(-1)
@@ -46,6 +48,9 @@ scoreY = 0
 # Game Over setup
 game_over_font = pygame.font.Font('Font/pricedown bl.ttf', 64)
 
+# Load sound effects
+laser_sound = mixer.Sound('Music/shoot.wav')
+col_sound = mixer.Sound('Music/explosion.wav')
 
 # FUNCTIONS
 def player(x, y):
@@ -99,6 +104,7 @@ while running:
                     if pro_state == "ready":
                         proX = playerX
                         proY = playerY
+                        laser_sound.play()  # Play the laser sound effect
                         projectile(proX, proY)
 
         if event.type == pygame.KEYUP:
@@ -128,6 +134,7 @@ while running:
 
         # Check for collision
         if is_collision(enemyX, enemyY, proX, proY):
+            col_sound.play()  # Play collision sound effect
             pro_state = "ready"
             score += 1
             enemyX = 875
