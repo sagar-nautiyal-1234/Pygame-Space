@@ -7,7 +7,7 @@ pygame.init()
 
 win = pygame.display.set_mode((900, 600))
 
-# Uncomment if you have background music and image
+
 bg = pygame.image.load('Images/bg.jpg')
 mixer.music.load('Music/background.wav')
 mixer.music.play(-1)
